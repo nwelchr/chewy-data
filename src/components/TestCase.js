@@ -5,31 +5,38 @@ import Carousel from 'nuka-carousel';
 export default class TestCase extends Component {
   constructor(props) {
     super(props);
-    this.state = { active: false };
+    this.state = { active: false, fadeOut: false };
+    this.toggleSize = this.toggleSize.bind(this);
   }
 
-  renderImages() {
+  renderImages = () => {
     const images = this.props.testCase.test_steps;
     return images.map((testStep, idx) => (
-      <div class="img-container">
+      <div key={idx} className="img-container">
         <img
-          class="test-case-img"
+          key={idx}
+          className="test-case-img"
           src={window.location.origin + `/images/${testStep.screenshot}`}
         />
       </div>
     ));
-  }
+  };
 
   toggleSize = e => {
     e.stopPropagation();
+    const clickedTestCase = e.currentTarget.classList.contains('test-case');
+    e.currentTarget.classList.contains('images');
     switch (e.type) {
       case 'mousedown':
-        if (e.currentTarget.classList.contains('test-case')) {
+        if (clickedTestCase) {
           this.setState({ active: true });
         }
         break;
       case 'mouseup':
-        this.setState({ active: false });
+        if (clickedTestCase) {
+          this.setState({ active: false });
+          this.props.switchToChart(this.props.testCaseId);
+        }
         break;
       default:
         break;
@@ -43,7 +50,7 @@ export default class TestCase extends Component {
         className={`test-case ${active}`}
         onMouseUp={this.toggleSize}
         onMouseDown={this.toggleSize}>
-        <section class="info">
+        <section className="info">
           <h1>{this.props.testCase.test_name}</h1>
           <h2>
             Status: Test {this.props.testCase.status === false ? 'not' : ''}{' '}
