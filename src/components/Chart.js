@@ -36,7 +36,7 @@ export default class Chart extends Component {
 
   render() {
     return (
-      <div classname="chart">
+      <div className="chart">
         <Bar
           data={this.state.chartData}
           options={{
