@@ -9,6 +9,7 @@ class App extends Component {
     super(props);
     this.state = { showChart: false, showing: true };
     this.switchToChart = this.switchToChart.bind(this);
+    this.switchToDashboard = this.switchToDashboard.bind(this);
   }
 
   componentDidMount() {
@@ -23,7 +24,13 @@ class App extends Component {
   switchToChart(testCaseId) {
     this.setState({ showing: false });
     setTimeout(() => {
-      this.setState({ showChart: true, fadeOut: true, testCaseId });
+      this.setState({ showChart: true, showing: true, testCaseId });
+    }, 3000);
+  }
+
+  switchToDashboard() {
+    setTimeout(() => {
+      this.setState({ showChart: false });
     }, 3000);
   }
 
@@ -36,6 +43,7 @@ class App extends Component {
         <Chart
           testCaseId={this.state.testCaseId}
           testCase={test_cases[this.state.testCaseId]}
+          switchToDashboard={this.switchToDashboard}
         />
       );
     } else {

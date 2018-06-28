@@ -1,9 +1,12 @@
 body {
   background: linear-gradient(45deg, #7a26b6, #1059c6, #23a6d5, #23d564);
   background-size: 400% 400%;
-  /* -webkit-animation: gradient-background 20s ease infinite;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  -webkit-animation: gradient-background 20s ease infinite;
   -moz-animation: gradient-background 20s ease infinite;
-  animation: gradient-background 20s ease infinite; */
+  animation: gradient-background 20s ease infinite;
   font-family: 'HelveticaNeue-Light';
   min-height: 100vh;
   user-select: none;
@@ -45,8 +48,14 @@ body {
   }
 }
 
+#root {
+  width: 100%;
+}
+
 .app {
   display: flex column;
+  width: calc(100% - 200px);
+  margin: 100px;
 }
 
 .app.fade-out {
@@ -91,6 +100,8 @@ h1 {
   font-size: 50px;
   font-family: 'HelveticaNeue-UltraLight';
   font-weight: normal;
+  padding: 20px;
+  letter-spacing: 0.5px;
 }
 
 header {
@@ -107,4 +118,5 @@ main {
 
 footer {
   text-align: center;
+  padding: 30px;
 }

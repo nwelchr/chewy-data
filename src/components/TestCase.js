@@ -24,6 +24,7 @@ export default class TestCase extends Component {
 
   toggleSize = e => {
     e.stopPropagation();
+    console.log(e.currentTarget);
     const clickedTestCase = e.currentTarget.classList.contains('test-case');
     e.currentTarget.classList.contains('images');
     switch (e.type) {
@@ -33,8 +34,8 @@ export default class TestCase extends Component {
         }
         break;
       case 'mouseup':
+        this.setState({ active: false });
         if (clickedTestCase) {
-          this.setState({ active: false });
           this.props.switchToChart(this.props.testCaseId);
         }
         break;
@@ -48,16 +49,18 @@ export default class TestCase extends Component {
     return (
       <section
         className={`test-case ${active}`}
-        onMouseUp={this.toggleSize}
-        onMouseDown={this.toggleSize}>
+        onMouseDown={this.toggleSize}
+        onMouseUp={this.toggleSize}>
         <section className="info">
           <h1>{this.props.testCase.test_name}</h1>
           <h2>
-            Status: Test {this.props.testCase.status === false ? 'not' : ''}{' '}
-            passed.
+            Status: Test {this.props.testCase.status ? 'passed' : 'failed'}.
           </h2>
         </section>
-        <section className="images" onMouseDown={this.toggleSize}>
+        <section
+          className="images"
+          onMouseDown={this.toggleSize}
+          onMouseUp={this.toggleSize}>
           <Carousel autoplay={true} cellAlign={'center'} wrapAround={true}>
             {this.renderImages()}
           </Carousel>

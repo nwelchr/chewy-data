@@ -1,0 +1,26 @@
+.back-button {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background-color: black;
+  color: white;
+  border: 1px solid white;
+  outline: 0;
+  transform: scale(1);
+  font-size: 20px;
+  font-family: 'HelveticaNeue-Light';
+  transition: 0.2s ease;
+  opacity: 0.7;
+}
+
+.back-button:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.back-button:active {
+  transform: scale(1.03);
+  transition: 0.05s ease;
+  opacity: 0.8;
+}

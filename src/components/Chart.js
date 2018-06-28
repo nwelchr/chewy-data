@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Bar } from 'react-chartjs-2';
+import { Line } from 'react-chartjs-2';
+import './Chart.css';
 
 export default class Chart extends Component {
   constructor(props) {
@@ -21,34 +22,62 @@ export default class Chart extends Component {
     };
   }
 
-  findAvg(data) {
-    return data.reduce((acc, el) => acc += el) / data.length;
-  }
-
   static getDerivedStateFromProps(props) {
-    debugger;
+    function findAvg(data) {
+      return (
+        Math.round(
+          (data.reduce((acc, el) => (acc += el)) / data.length) * 10000
+        ) / 10000
+      );
+    }
+
     let aggregateData = {};
     aggregateData.labels = [];
-    aggregateData.avgLaunchTimes = [];
-    aggregateData.avgMemory = [];
-    aggregateData.avgCpu = [];
+    aggregateData.dataSets = {};
+    aggregateData.dataSets.avgLaunchTimes = [];
+    aggregateData.dataSets.avgMemory = [];
+    aggregateData.dataSets.avgCpu = [];
+
+    let data = [];
+
     props.testCase.test_steps.forEach((testStep, idx) => {
       aggregateData.labels.push(testStep.step_name);
-      aggregateData.avgLaunchTimes.push(this.findAvg(testStep.launch_times))
+
+      const avgLaunchTime = findAvg(testStep.launch_times);
+      const avgMemory = findAvg(testStep.memory);
+      const avgCpu = findAvg(testStep.cpu);
+
+      aggregateData.dataSets.avgLaunchTimes.push(avgLaunchTime);
+      aggregateData.dataSets.avgMemory.push(avgMemory);
+      aggregateData.dataSets.avgCpu.push(avgCpu);
 
       const currGraph = {};
       currGraph.label = testStep.step_name;
-      currGraph. 
+      currGraph.avgLaunchTime = avgLaunchTime;
+      currGraph.avgMemory = avgMemory;
+      currGraph.avgCpu = avgCpu;
+
+      data.push(currGraph);
     });
-    
+
+    console.log(aggregateData, 'aggData');
+    console.log(data, 'data');
   }
+
+  switchToDashboard = () => {
+    this.setState({ showing: false });
+    this.props.switchToDashboard();
+  };
 
   render() {
     const showing = this.state.showing ? 'fade-in' : 'fade-out';
 
     return (
       <div className={`app ${showing}`}>
-        <Bar
+        <button className="back-button" onClick={this.switchToDashboard}>
+          Back
+        </button>
+        <Line
           data={this.state.chartData}
           options={{
             title: {
