@@ -22,7 +22,11 @@ export default class Dashboard extends Component {
 
     const charts = [];
     const dataProperties = ['launch_times', 'memory', 'cpu'];
-    const colors = ['#81e', '#7e1', '#ff5'];
+    const colors = [
+      'rgba(232,83,82,.5)',
+      'rgba(70,230,147,.5)',
+      'rgb(94,82,232,.5)'
+    ];
 
     // Organize aggregate data
     const avgData = {
@@ -44,7 +48,8 @@ export default class Dashboard extends Component {
       const dataset = {
         label,
         data: [],
-        borderColor: colors[i]
+        borderColor: colors[i],
+        backgroundColor: colors[i]
       };
       props.testCase.test_steps.forEach((testStep, j) => {
         currData.labels.push(testStep.step_name);
@@ -73,7 +78,8 @@ export default class Dashboard extends Component {
             {
               label,
               data: testStep[dataProperties[i]],
-              borderColor: colors[i]
+              borderColor: colors[i],
+              backgroundColor: colors[i]
             }
           ]
         };

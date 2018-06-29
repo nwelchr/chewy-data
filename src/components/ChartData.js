@@ -18,6 +18,16 @@ export default props => {
               text: data.title,
               fontSize: '30'
             },
+            scales: {
+              yAxes: [
+                {
+                  display: true,
+                  ticks: {
+                    beginAtZero: true
+                  }
+                }
+              ]
+            },
             legend: {
               display: true,
               position: 'bottom'
