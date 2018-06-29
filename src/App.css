@@ -10,6 +10,7 @@ body {
   font-family: 'HelveticaNeue-Light';
   min-height: 100vh;
   user-select: none;
+  color: white;
 }
 
 @-webkit-keyframes gradient-background {

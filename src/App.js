@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import Chart from './components/Chart';
+import Dashboard from './components/Dashboard';
 import './App.css';
 import TestCase from './components/TestCase';
-import data from './data.json';
 
 class App extends Component {
   constructor(props) {
@@ -40,7 +39,7 @@ class App extends Component {
 
     if (this.state.showChart) {
       return (
-        <Chart
+        <Dashboard
           testCaseId={this.state.testCaseId}
           testCase={test_cases[this.state.testCaseId]}
           switchToDashboard={this.switchToDashboard}

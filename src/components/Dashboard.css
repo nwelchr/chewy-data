@@ -1,3 +1,33 @@
+.chart-main {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+}
+
+.charts {
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.chart-nav li {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 15px 5px;
+  font-size: 20px;
+  background-color: rgba(0, 0, 0, 0.2);
+  transition: 0.2s ease;
+  margin: 1px;
+}
+
+.chart-nav li:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
 .back-button {
   width: 80px;
   height: 80px;
