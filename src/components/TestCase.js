@@ -24,7 +24,6 @@ export default class TestCase extends Component {
 
   toggleSize = e => {
     e.stopPropagation();
-    console.log(e.currentTarget);
     const clickedTestCase = e.currentTarget.classList.contains('test-case');
     e.currentTarget.classList.contains('images');
     switch (e.type) {

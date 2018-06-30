@@ -11,9 +11,7 @@ class App extends Component {
     this.switchToDashboard = this.switchToDashboard.bind(this);
   }
 
-  componentDidMount() {
-    console.log(this.props.data);
-  }
+  componentDidMount() {}
 
   parseTimeStamp(timeStamp) {
     const testDate = new Date(timeStamp);

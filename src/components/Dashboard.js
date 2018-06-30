@@ -7,8 +7,13 @@ export default class Dashboard extends Component {
     super(props);
     this.state = {
       showing: true,
-      currChart: 0
+      currChart: 0,
+      currNavText: 'Aggregate Data',
+      dropdownShowing: false
     };
+
+    this.toggleDropdown = this.toggleDropdown.bind(this);
+    this.handleClickOutside = this.handleClickOutside.bind(this);
   }
 
   static getDerivedStateFromProps(props) {
@@ -30,7 +35,7 @@ export default class Dashboard extends Component {
 
     // Organize aggregate data
     const avgData = {
-      title: 'Aggregate data',
+      title: 'Aggregate Data',
       data: []
     };
     const avgLabels = [
@@ -94,32 +99,68 @@ export default class Dashboard extends Component {
     };
   }
 
-  switchToDashboard = () => {
+  componentDidMount() {
+    document.addEventListener('mousedown', this.handleClickOutside);
+  }
+
+  componentWillUnmount() {
+    document.removeEventListener('mousedown', this.handleClickOutside);
+  }
+
+  handleClickOutside = e => {
+    if (this.node && !this.node.contains(e.target)) {
+      this.setState({ dropdownShowing: false });
+    }
+  };
+
+  switchToDashboard() {
     this.setState({ showing: false });
     this.props.switchToDashboard();
-  };
+  }
 
   changeChart = idx => {
-    this.setState({ currChart: idx });
+    this.setState({
+      currChart: idx,
+      currNavText: this.state.charts[idx].title
+    });
+    this.toggleDropdown();
   };
 
+  toggleDropdown() {
+    this.setState({ dropdownShowing: !this.state.dropdownShowing });
+  }
+
   renderNavbar() {
+    const dropdown = this.state.dropdownShowing ? 'showing' : 'hidden';
     return (
-      <ul className="chart-nav">
-        {this.state.charts.map((chart, key) => (
-          <li key={key} onClick={() => this.changeChart(key)}>
-            {chart.title}
+      <nav className="chart-nav" ref={node => (this.node = node)}>
+        <ul className="dropdown-ul">
+          <li onClick={this.toggleDropdown} className="dropdown-text">
+            {this.state.currNavText}
           </li>
-        ))}
-      </ul>
+          <ul className={`content ${dropdown}`}>
+            {this.state.charts
+              .filter((chart, id) => id !== this.state.currChart)
+              .map((chart, key) => (
+                <li key={key} onClick={() => this.changeChart(key)}>
+                  {chart.title}
+                </li>
+              ))}
+          </ul>
+        </ul>
+      </nav>
     );
   }
 
   renderChart() {
     const chart = this.state.charts[this.state.currChart];
     return (
-      <section class="charts">
-        <ChartData title={chart.title} data={chart.data} />
+      <section className="charts">
+        <ChartData
+          key={this.state.currChart}
+          title={chart.title}
+          data={chart.data}
+        />
       </section>
     );
   }
@@ -131,9 +172,9 @@ export default class Dashboard extends Component {
     return (
       <div className={`app ${showing}`}>
         <button className="back-button" onClick={this.switchToDashboard}>
-          Back
+          <img src={window.location.origin + `/images/arrow.png`} />
         </button>
-        <main class="chart-main">
+        <main className="chart-main">
           {this.renderChart()}
           {this.renderNavbar()}
         </main>

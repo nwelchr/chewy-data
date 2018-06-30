@@ -3,14 +3,15 @@ import { Bar, Line, defaults } from 'react-chartjs-2';
 import './ChartData.css';
 
 export default props => {
-  console.log(props);
   defaults.global.defaultFontColor = '#fff';
   defaults.global.defaultFontFamily = "'HelveticaNeue-Light', 'Helvetica'";
+  defaults.global.legend.onClick = null;
   return (
     <Fragment>
       <h1>{props.title}</h1>
-      {props.data.map((data, idx) => (
+      {props.data.map((data, key) => (
         <Bar
+          key={key}
           data={data}
           options={{
             title: {
