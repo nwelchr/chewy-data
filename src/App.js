@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import Dashboard from './components/Dashboard';
-import './reset.css';
 import './App.css';
 import TestCase from './components/TestCase';
 import GithubLogo from './images/github.png';
