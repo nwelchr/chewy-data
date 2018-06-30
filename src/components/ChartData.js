@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from 'react';
-import { Bar, Line, defaults } from 'react-chartjs-2';
+import React, { Fragment } from 'react';
+import { Bar, defaults } from 'react-chartjs-2';
 import './ChartData.css';
 
 export default props => {
