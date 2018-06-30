@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Dashboard from './components/Dashboard';
 import './App.css';
 import TestCase from './components/TestCase';
+import GithubLogo from './images/github.png';
 
 class App extends Component {
   constructor(props) {
@@ -65,7 +66,11 @@ class App extends Component {
               />
             ))}
           </main>
-          <footer>Made by Nicholas Welch</footer>
+          <footer>
+            <a href="https://github.com/nwelchr">
+              <img class="github" src={GithubLogo} />
+            </a>
+          </footer>
         </div>
       );
     }

@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './Dashboard.css';
 import ChartData from './ChartData';
+import Arrow from '../images/arrow.png';
 
 export default class Dashboard extends Component {
   constructor(props) {
@@ -14,6 +15,7 @@ export default class Dashboard extends Component {
 
     this.toggleDropdown = this.toggleDropdown.bind(this);
     this.handleClickOutside = this.handleClickOutside.bind(this);
+    this.switchToDashboard = this.switchToDashboard.bind(this);
   }
 
   static getDerivedStateFromProps(props) {
@@ -139,15 +141,25 @@ export default class Dashboard extends Component {
             {this.state.currNavText}
           </li>
           <ul className={`content ${dropdown}`}>
-            {this.state.charts
-              .filter((chart, id) => id !== this.state.currChart)
-              .map((chart, key) => (
-                <li key={key} onClick={() => this.changeChart(key)}>
-                  {chart.title}
-                </li>
-              ))}
+            {this.state.charts.map((chart, key) => (
+              <li
+                className={`content-li ${
+                  this.state.currChart === key ? 'selected' : ''
+                }`}
+                key={key}
+                onClick={() => this.changeChart(key)}>
+                {chart.title}
+              </li>
+            ))}
           </ul>
         </ul>
+        <section class="screenshot">
+          <img
+            src={require('../images/file' +
+              (this.state.currChart + 1) +
+              '.png')}
+          />
+        </section>
       </nav>
     );
   }
@@ -172,7 +184,7 @@ export default class Dashboard extends Component {
     return (
       <div className={`app ${showing}`}>
         <button className="back-button" onClick={this.switchToDashboard}>
-          <img src={window.location.origin + `/images/arrow.png`} />
+          <img src={Arrow} />
         </button>
         <main className="chart-main">
           {this.renderChart()}

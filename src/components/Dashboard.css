@@ -25,6 +25,10 @@
     max-width: 200px;
   }
 
+  .content {
+    width: 100%;
+  }
+
   .dropdown-ul {
     position: relative;
   }
@@ -34,15 +38,32 @@
     overflow: hidden;
     transition: max-height 0.5s ease;
   }
+
   .content.showing {
     max-height: 500px;
     overflow: hidden;
     transition: max-height 2s ease;
   }
 
+  .content-li {
+    width: 100%;
+  }
+
+  .content-li.selected {
+    display: none;
+  }
+
   .dropdown-text {
     display: block;
   }
+
+  .screenshot {
+    display: none;
+  }
+}
+
+.content-li.selected {
+  background: rgba(0, 0, 0, 0.5);
 }
 
 .charts {
@@ -80,6 +101,12 @@
 
 .chart-nav li:hover {
   background-color: rgba(0, 0, 0, 0.5);
+}
+
+.screenshot img {
+  max-width: 200px;
+  opacity: 0.8;
+  margin: 30px;
 }
 
 .back-button {

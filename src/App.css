@@ -123,3 +123,23 @@ footer {
   text-align: center;
   padding: 30px;
 }
+
+.github {
+  width: 40px;
+  height: 40px;
+  filter: invert(100);
+  transform: scale(1);
+  opacity: 0.8;
+  transition: 0.2s ease;
+}
+
+.github:hover {
+  transform: scale(1.05);
+  opacity: 1;
+}
+
+.github:active {
+  opacity: 0.9;
+  transition: 0.05s ease;
+  transform: scale(1.02);
+}

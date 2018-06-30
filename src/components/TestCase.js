@@ -16,7 +16,7 @@ export default class TestCase extends Component {
         <img
           key={idx}
           className="test-case-img"
-          src={window.location.origin + `/images/${testStep.screenshot}`}
+          src={require('../images/file' + (idx + 1) + '.png')}
         />
       </div>
     ));
